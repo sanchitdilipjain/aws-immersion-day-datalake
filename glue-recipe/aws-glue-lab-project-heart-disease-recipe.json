@@ -1,0 +1,162 @@
+[
+  {
+    "Action": {
+      "Operation": "TO_DOUBLE_COLUMN",
+      "Parameters": {
+        "columnDataType": "number",
+        "sourceColumn": "0.011"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "TO_DOUBLE_COLUMN",
+      "Parameters": {
+        "columnDataType": "number",
+        "sourceColumn": "6.0"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "RENAME",
+      "Parameters": {
+        "sourceColumn": "63.0",
+        "targetColumn": "age"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "RENAME",
+      "Parameters": {
+        "sourceColumn": "1.01",
+        "targetColumn": "sex"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "RENAME",
+      "Parameters": {
+        "sourceColumn": "1.02",
+        "targetColumn": "cp"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "RENAME",
+      "Parameters": {
+        "sourceColumn": "145.0",
+        "targetColumn": "trestbps"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "RENAME",
+      "Parameters": {
+        "sourceColumn": "233.0",
+        "targetColumn": "chol"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "RENAME",
+      "Parameters": {
+        "sourceColumn": "1.05",
+        "targetColumn": "fbs"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "RENAME",
+      "Parameters": {
+        "sourceColumn": "2.0",
+        "targetColumn": "restecg"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "RENAME",
+      "Parameters": {
+        "sourceColumn": "150.0",
+        "targetColumn": "thalach"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "RENAME",
+      "Parameters": {
+        "sourceColumn": "0.08",
+        "targetColumn": "exang"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "RENAME",
+      "Parameters": {
+        "sourceColumn": "2.3",
+        "targetColumn": "oldpeak"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "RENAME",
+      "Parameters": {
+        "sourceColumn": "3.0",
+        "targetColumn": "slope"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "RENAME",
+      "Parameters": {
+        "sourceColumn": "0.011",
+        "targetColumn": "ca"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "RENAME",
+      "Parameters": {
+        "sourceColumn": "6.0",
+        "targetColumn": "thal"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "RENAME",
+      "Parameters": {
+        "sourceColumn": "0",
+        "targetColumn": "num"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "FILL_WITH_MEDIAN",
+      "Parameters": {
+        "sourceColumn": "ca"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "FILL_WITH_MEDIAN",
+      "Parameters": {
+        "sourceColumn": "thal"
+      }
+    }
+  }
+]
