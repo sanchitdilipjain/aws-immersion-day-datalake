@@ -2,11 +2,11 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "create role for glue demo",
   "Resources": {
-    "IAMGlueDemoRole": {
+    "IAMStudioRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "RoleName": {
-          "Fn::Sub": "${AWS::StackName}-glue-demo-role"
+          "Fn::Sub": "${AWS::StackName}-studio-role"
         },
         "AssumeRolePolicyDocument": {
           "Version": "2012-10-17",
@@ -15,7 +15,144 @@
               "Effect": "Allow",
               "Principal": {
                 "Service": [
-                  "glue.amazonaws.com",
+                  "glue.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        },
+        "Path": "/",
+        "Policies": [
+          {
+            "PolicyName": "glue-custom-role",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "databrew:*",
+                    "glue:*",
+                    "glue:GetDatabases",
+                    "glue:GetPartitions",
+                    "glue:GetTable",
+                    "glue:GetTables",
+                    "glue:GetDataCatalogEncryptionSettings",
+                    "dataexchange:ListDataSets",
+                    "dataexchange:ListDataSetRevisions",
+                    "dataexchange:ListRevisionAssets",
+                    "dataexchange:CreateJob",
+                    "dataexchange:StartJob",
+                    "dataexchange:GetJob",
+                    "kms:DescribeKey",
+                    "kms:ListKeys",
+                    "kms:ListAliases",
+                    "s3:ListBucket",
+                    "s3:ListAllMyBuckets",
+                    "s3:PutObject",
+                    "s3:GetObject",
+                    "s3:DeleteObject",
+                    "s3:GetBucketCORS",
+                    "s3:GetBucketAcl",
+                    "s3:GetBucketLocation",
+                    "s3:GetEncryptionConfiguration",
+                    "sts:GetCallerIdentity",
+                    "cloudtrail:LookupEvents",
+                    "iam:ListRoles",
+                    "iam:GetRole",
+                    "ec2:DescribeVpcEndpoints",
+                    "ec2:DescribeRouteTables",
+                    "ec2:CreateNetworkInterface",
+                    "ec2:DeleteNetworkInterface",
+                    "ec2:DescribeNetworkInterfaces",
+                    "ec2:DescribeSecurityGroups",
+                    "ec2:DescribeSubnets",
+                    "ec2:DescribeVpcAttribute",
+                    "ec2:CreateTags",
+                    "ec2:DeleteTags",
+                    "iam:ListRolePolicies",
+                    "iam:GetRole",
+                    "iam:GetRolePolicy",
+                    "cloudwatch:PutMetricData"
+                  ],
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "ToGenerateKmskey",
+                  "Effect": "Allow",
+                  "Action": [
+                    "kms:GenerateDataKey"
+                  ],
+                  "Resource": [
+                    "*"
+                  ],
+                  "Condition": {
+                    "StringLike": {
+                      "kms:ViaService": [
+                        "s3.*.amazonaws.com"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "Sid": "ToActOnUsersBehalf",
+                  "Effect": "Allow",
+                  "Action": [
+                    "iam:PassRole"
+                  ],
+                  "Resource": [
+                    "arn:aws:iam::*:role/*"
+                  ],
+                  "Condition": {
+                    "StringEquals": {
+                      "iam:PassedToService": [
+                        "databrew.amazonaws.com"
+                      ]
+                    }
+                  }
+                },
+                {
+                    "Sid": "ToUseCloudWatchLogs",
+                    "Effect": "Allow",
+                    "Action": [
+                        "logs:CreateLogGroup",
+                        "logs:CreateLogStream",
+                        "logs:PutLogEvents"
+                    ],
+                    "Resource": [
+                        "arn:aws:logs:*:*:log-group:/aws-glue-databrew/*"
+                    ]
+                },
+                {
+                    "Sid": "ToUseLakeFormation",
+                    "Effect": "Allow",
+                    "Action": [
+                        "lakeformation:GetDataAccess"
+                    ],
+                    "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "IAMDatabrewRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": {
+          "Fn::Sub": "${AWS::StackName}-databrew-role"
+        },
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
                   "databrew.amazonaws.com"
                 ]
               },
